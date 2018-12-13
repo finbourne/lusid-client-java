@@ -34,6 +34,6 @@ $ mvn -e -fae -Dtest=LusidApiTests test
 
 Alernatively it can be run using docker with:
 ```
-$ docker run -it --rm -v $(pwd):/usr/src/lusid-client-java -w /usr/src/lusid-client-java maven:3.6.0-jdk-10-slim mvn -e -fae -Dtest=LusidApiTests test`
+$ docker run -it --rm -v $(pwd):/usr/src/lusid-client-java -w /usr/src/lusid-client-java maven:3.6.0-jdk-11-slim mvn -e -fae -Dtest=LusidApiTests test`
 ```
 
