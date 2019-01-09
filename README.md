@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/finbourne/lusid-client-java.svg?branch=master)](https://travis-ci.com/finbourne/lusid-client-java)
+[![Build Status](https://travis-ci.org/finbourne/lusid-client-java.svg?branch=master)](https://travis-ci.org/finbourne/lusid-client-java)
 
 ## Test Configuration
 
