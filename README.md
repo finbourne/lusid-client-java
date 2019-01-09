@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/finbourne/lusid-client-java.svg?branch=master)](https://travis-ci.com/finbourne/lusid-client-java)
+
 ## Test Configuration
 
 Prior to running the tests create a properties file named `secrets.json` in the `src/test/resources` folder with the structure below and populated with the appropriate values.
