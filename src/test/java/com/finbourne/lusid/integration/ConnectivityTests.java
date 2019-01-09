@@ -16,7 +16,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 @RunWith(value = Parameterized.class)
-public class ConnectivityTest {
+public class ConnectivityTests {
 
     @Parameterized.Parameter
     public String testUrl;
