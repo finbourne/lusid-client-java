@@ -1,6 +1,7 @@
 package com.finbourne.lusid.integration;
 
 import okhttp3.*;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -45,6 +46,7 @@ public class ConnectivityTest {
     }
 
     @Test
+    @Ignore
     public void verify_connection_with_proxy() throws IOException {
 
         //  this should be your proxy address
@@ -75,3 +77,4 @@ public class ConnectivityTest {
         assertThat(response.code(), is(equalTo(200)));
     }
 }
+
