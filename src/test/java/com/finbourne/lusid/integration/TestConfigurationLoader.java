@@ -2,6 +2,7 @@ package com.finbourne.lusid.integration;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public class TestConfigurationLoader {
 
@@ -15,12 +16,13 @@ public class TestConfigurationLoader {
     public File loadConfiguration(String apiConfig) throws IOException {
 
         ClassLoader classLoader = getClass().getClassLoader();
-        File configFile = new File(classLoader.getResource(apiConfig).getFile());
+        URL url = classLoader.getResource(apiConfig);
 
-        if (configFile == null) {
-            throw new IOException("cannot find " + apiConfig + "in classpath");
+        if (url == null) {
+            throw new IOException("cannot find " + apiConfig + " in classpath");
         }
 
+        File configFile = new File(url.getFile());
         return new File(configFile.toURI());
     }
 
