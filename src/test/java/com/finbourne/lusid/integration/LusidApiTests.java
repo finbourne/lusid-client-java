@@ -17,6 +17,7 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+import static com.finbourne.lusid.integration.TestDataUtilities.LUSID_INSTRUMENT_IDENTIFIER;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -154,7 +155,7 @@ public class LusidApiTests {
         TransactionRequest transaction = new TransactionRequest()
                 .transactionId(UUID.randomUUID().toString())
                 .type("Buy")
-                .instrumentUid(instrumentIds.get(0))
+                .instrumentIdentifiers(new HashMap<String, String>() {{ put(LUSID_INSTRUMENT_IDENTIFIER, instrumentIds.get(0)); }})
                 .totalConsideration(new CurrencyAndAmount().currency("GBP").amount(1230.0))
                 .transactionDate(effectiveDate)
                 .settlementDate(effectiveDate)
@@ -221,7 +222,7 @@ public class LusidApiTests {
         Function<TransactionSpec, TransactionRequest> buildTransaction = t -> new TransactionRequest()
                 .transactionId(UUID.randomUUID().toString())
                 .type("Buy")
-                .instrumentUid(t.getId())
+                .instrumentIdentifiers(new HashMap<String, String>() {{ put(LUSID_INSTRUMENT_IDENTIFIER, t.getId()); }})
                 .transactionDate(t.getTradeDate())
                 .settlementDate(t.getTradeDate())
                 .units(100.0)
