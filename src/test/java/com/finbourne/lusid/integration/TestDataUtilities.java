@@ -80,7 +80,7 @@ public class TestDataUtilities {
                 .settlementDate(tradeDate)
                 .units(units)
                 .transactionPrice(new TransactionPrice().price(price))
-                .source(TransactionRequest.SourceEnum.CLIENT);
+                .source("Custodian");
     }
 
 
@@ -106,7 +106,7 @@ public class TestDataUtilities {
                 .transactionDate(tradeDate)
                 .settlementDate(tradeDate)
                 .units(units)
-                .source(TransactionRequest.SourceEnum.CLIENT);
+                .source("Custodian");
     }
 
 }

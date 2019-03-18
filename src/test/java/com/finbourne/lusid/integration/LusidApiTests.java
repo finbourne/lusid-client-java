@@ -161,7 +161,7 @@ public class LusidApiTests {
                 .settlementDate(effectiveDate)
                 .units(100.0)
                 .transactionPrice(new TransactionPrice().price(12.3))
-                .source(TransactionRequest.SourceEnum.CLIENT)
+                .source("Custodian")
                 .properties(properties);
 
         //  add the trade
@@ -228,7 +228,7 @@ public class LusidApiTests {
                 .units(100.0)
                 .transactionPrice(new TransactionPrice().price(t.getPrice()))
                 .totalConsideration(new CurrencyAndAmount().amount(100.0 * t.getPrice()).currency("GBP"))
-                .source(TransactionRequest.SourceEnum.CLIENT);
+                .source("Custodian");
 
         Consumer<List<Transaction>> printTransactions = transactions -> transactions.forEach(t ->
                 System.out.println(
