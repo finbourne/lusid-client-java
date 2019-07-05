@@ -24,9 +24,23 @@ public class ConnectivityTests {
     @Parameterized.Parameters(name = "{index}: testUrl - {0}")
     public static Object[] data() {
         return new Object[] {
-                "https://www.howsmyssl.com/a/check",
-                "https://api.lusid.com/api/metadata/versions",
-                "https://lusid.okta.com/oauth2/aus5al5yopbHW2wJn2p6/.well-known/oauth-authorization-server"
+                "https://www.howsmyssl.com/a/check"
+
+                /*
+                    enable the following url with your specific LUSID domain e.g.
+
+                        https://myco.lusid.com/api/api/metadata/versions
+
+                */
+                //"https://<enter your LUSID domain>.lusid.com/api/api/metadata/versions",
+
+                /*
+                    enable the following url with your specific LUSID domain e.g.
+
+                        https://myco.okta.com/oauth2/aus12345abcdef/.well-known/oauth-authorization-server
+                 */
+
+                //"https://<your LUSID domain>/oauth2/<your LUSID app id>/.well-known/oauth-authorization-server"
         };
     }
 
