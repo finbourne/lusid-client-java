@@ -46,11 +46,6 @@ public class LusidApiTests {
         instrumentIds = instrumentLoader.loadInstruments();
     }
 
-    @AfterClass
-    public static void tearDown() throws ApiException {
-        instrumentLoader.deleteInstruments();
-    }
-
     @Test
     public void create_portfolio() throws ApiException {
 
