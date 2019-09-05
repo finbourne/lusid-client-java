@@ -1,64 +1,68 @@
 package com.finbourne.lusid.integration;
 
 import com.finbourne.lusid.ApiClient;
-import com.finbourne.lusid.ApiException;
-import com.finbourne.lusid.api.InstrumentsApi;
-import com.finbourne.lusid.api.PortfoliosApi;
-import com.finbourne.lusid.api.PropertyDefinitionsApi;
-import com.finbourne.lusid.api.TransactionPortfoliosApi;
-import com.finbourne.lusid.model.*;
+import com.finbourne.lusid.api.ApplicationMetadataApi;
+import com.finbourne.lusid.model.VersionSummaryDto;
 import com.finbourne.lusid.utilities.ApiClientBuilder;
-import org.junit.AfterClass;
+import okhttp3.Credentials;
+import okhttp3.OkHttpClient;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.util.*;
-import java.util.function.Consumer;
-import java.util.function.Function;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 
-import static com.finbourne.lusid.integration.TestDataUtilities.LUSID_INSTRUMENT_IDENTIFIER;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class LusidApiTests {
 
-    private static List<String> instrumentIds;
-
-    private static PortfoliosApi portfoliosApi;
-    private static TransactionPortfoliosApi transactionPortfoliosApi;
-    private static PropertyDefinitionsApi propertyDefinitionsApi;
-
-    private static InstrumentLoader instrumentLoader;
-
-    @BeforeClass
-    public static void setUp() throws Exception {
+    @Test
+    public void call_lusid_api() throws Exception {
 
         ApiClient apiClient = new ApiClientBuilder("secrets.json").build();
+        ApplicationMetadataApi metadataApi = new ApplicationMetadataApi(apiClient);
 
-        portfoliosApi = new PortfoliosApi(apiClient);
-        transactionPortfoliosApi = new TransactionPortfoliosApi(apiClient);
-        propertyDefinitionsApi = new PropertyDefinitionsApi(apiClient);
+        VersionSummaryDto version = metadataApi.getLusidVersions();
 
-        InstrumentsApi instrumentsApi = new InstrumentsApi(apiClient);
-        instrumentLoader = new InstrumentLoader(instrumentsApi);
-        instrumentIds = instrumentLoader.loadInstruments();
+        assertNotNull(version.getApiVersion());
+        assertNotNull(version.getBuildVersion());
+        assertNotNull(version.getExcelVersion());
     }
 
     @Test
-    public void create_portfolio() throws ApiException {
+    @Ignore
+    public void call_lusid_api_with_proxy() throws Exception {
 
-        final String scope = "finbourne";
-        final String uuid = UUID.randomUUID().toString();
+        //  this should be your proxy address
+        InetSocketAddress   proxy = new InetSocketAddress(InetAddress.getLocalHost(), 8888);
 
-        final CreateTransactionPortfolioRequest request = new CreateTransactionPortfolioRequest()
-                .displayName(String.format("Portfolio-%s", uuid))
-                .code(String.format("Id-%s", uuid))
-                .baseCurrency("GBP");
+        //  username and password for the proxy
+        String  proxyUsername = "user";
+        String  proxyPassword = "password";
 
-        final Portfolio portfolio = transactionPortfoliosApi.createPortfolio(scope, request);
+        ApiClient apiClient = new ApiClientBuilder("secrets.json").build();
 
-        assertEquals(request.getCode(), portfolio.getId().getCode());
+        apiClient.setHttpClient(
+                new OkHttpClient.Builder()
+                        .proxy(new Proxy(Proxy.Type.HTTP, proxy))
+                        .proxyAuthenticator((route, response) -> {
+                            String credential = Credentials.basic(proxyUsername, proxyPassword);
+                            return response.request().newBuilder()
+                                    .header("Proxy-Authorization", credential)
+                                    .build();
+                        })
+                        .build()
+        );
+
+        ApplicationMetadataApi metadataApi = new ApplicationMetadataApi(apiClient);
+
+        VersionSummaryDto version = metadataApi.getLusidVersions();
+
+        assertNotNull(version.getApiVersion());
+        assertNotNull(version.getBuildVersion());
+        assertNotNull(version.getExcelVersion());
     }
+
 }
