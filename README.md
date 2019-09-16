@@ -24,7 +24,7 @@ $ docker run -it --rm -v $(pwd):/usr/src/lusid-client-java -w /usr/src/lusid-cli
 
 All authenticated calls to the LUSID API require an OpenID Connect ID token which is issued from a your token issuer url. The details of these can be found on your LUSID portal under "Applications" within the "Identity and Access Management" section. 
 
-[[https://github.com/finbourne/lusid-client-java/blob/master/iam-app.png]]
+![API credentials](https://github.com/finbourne/lusid-client-java/blob/master/iam-app.png)
 
 The API details can be supplied to the SDK as environment variables or via a file. The SDK will first check for the existence of the environment variables and if not found, will then check for `secrets.json` file.
 
