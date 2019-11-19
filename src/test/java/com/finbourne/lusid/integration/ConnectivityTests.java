@@ -64,7 +64,7 @@ public class ConnectivityTests {
     public void verify_connection_with_proxy() throws IOException {
 
         //  this should be your proxy address
-        InetSocketAddress   proxy = new InetSocketAddress(InetAddress.getLocalHost(), 8888);
+        InetSocketAddress   proxy = new InetSocketAddress(InetAddress.getLocalHost(), 8889);
 
         //  username and password for the proxy
         String  proxyUsername = "user";
