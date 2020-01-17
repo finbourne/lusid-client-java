@@ -2,11 +2,23 @@
 
 ## Running Connectivity Tests
 
-A set of tests have been provided to help diagnose any issues that may occur trying to connect to the LUSID API. These tests verify that you are able to make https calls (independent of LUSID) and
-can access the domains required in order to use the LUSID API. 
+A set of tests have been provided to help diagnose any issues that may occur trying to connect to the LUSID API. These tests verify that you are able to:
+ 
+- Make secure HTTPS calls (independent of LUSID)
+- Access the LUSID API via an unauthenticated endpoint
+- Access the identity provider (Okta) for authentication
+
 
 Prior to running the tests, edit [ConnectivityTests.java](https://github.com/finbourne/lusid-client-java/blob/master/src/test/java/com/finbourne/lusid/integration/ConnectivityTests.java)
-to add in the appropriate values you have been supplied.
+to add in the appropriate values you have been supplied. You will need:
+
+- Your LUSID client e.g. if your domain is https://globalfundmanager.lusid.com your client code is "globalfundmanager"
+- Your Okta issuer URL, this can be found at https://{your client code}.lusid.com/app/iam/applications e.g. 
+https://globalfundmanager.lusid.com/app/iam/applications. It will have the form https://lusid-{your client code}.okta.com/oauth2/{your auth server id}
+as shown in the screenshot below.
+
+![API credentials](https://github.com/finbourne/lusid-client-java/blob/master/iam-app.png)
+
 
 The connectivity tests are run using:
 
@@ -20,13 +32,24 @@ or with docker using
 $ docker run -it --rm -v $(pwd):/usr/src/lusid-client-java -w /usr/src/lusid-client-java maven:3.6.0-jdk-11-slim mvn -e -fae -Dtest=ConnectivityTests test
 ```
 
-# API Credentials
+# Using a Proxy
 
-All authenticated calls to the LUSID API require an OpenID Connect ID token which is issued from a your token issuer url. The details of these can be found on your LUSID portal under "Applications" within the "Identity and Access Management" section. 
+If the connectivity tests fail and/or you need to use a proxy, remove the `@Ignore` annotation on the
+`verify_connection_with_proxy()` test and run it adding in your:
 
-![API credentials](https://github.com/finbourne/lusid-client-java/blob/master/iam-app.png)
+- proxyAddress
+- port
+- proxyUsername
+- proxyPassword
 
-The API details can be supplied to the SDK as environment variables or via a file. The SDK will first check for the existence of the environment variables and if not found, will then check for `secrets.json` file.
+
+# Authenticating with your Credentials
+
+Once you have successfully demonstrated connectivity, you may wish to verify that you can successfully authenticate your user
+and make a call to the LUSID API. You can do this by running the tests in [LusidApiTests.java](https://github.com/finbourne/lusid-client-java/blob/master/src/test/java/com/finbourne/lusid/integration/LusidApiTests.java)
+
+The API details can be supplied to the SDK as environment variables or via a file. 
+The SDK will first check for the existence of the environment variables and if not found, will then check for `secrets.json` file.
 
 ## Environment Variables
 
@@ -53,7 +76,7 @@ If you use a proxy you can supply the proxy details via the following environmen
 
 ## Configuration File
 
-To supply the SDK configuration via a file, create a `secrets.json` in the src/test/resources folder with the structure below and populated with the appropriate values. If you use a proxy you can supply the proxy details in the `proxy` section. The `proxy` section is optional and only needed if you use a proxy.
+To supply the SDK configuration via a file, create a `secrets.json` in the src/test/resources folder (create it if it doesn't exist) with the structure below and populated with the appropriate values. If you use a proxy you can supply the proxy details in the `proxy` section. The `proxy` section is optional and only needed if you use a proxy.
 
 ``` json
 {
@@ -92,15 +115,17 @@ To supply the SDK configuration via a file, create a `secrets.json` in the src/t
 
 The path to the `secrets.json` is then passed to an [`ApiClientBuilder`](https://github.com/finbourne/lusid-sdk-java/blob/master/sdk/src/main/java/com/finbourne/lusid/utilities/ApiClientBuilder.java) which returns a configured LUSID API client.
 
-## Running tests
+You can read more about getting your credentials here [Getting Started with the LUSID APIs and SDKs](https://support.finbourne.com/getting-started-with-apis-sdks)
 
-Run the tests using a local maven installion using:
+## Running all tests together
+
+Run all the tests together using a local maven installation using:
 
 ```
 $ mvn -e -fae test
 ```
 
-Alernatively it can be run using docker with:
+Alternatively it can be run using docker with:
 ```
 $ docker run -it --rm -v $(pwd):/usr/src/lusid-client-java -w /usr/src/lusid-client-java maven:3.6.0-jdk-11-slim mvn -e -fae test
 ```
