@@ -1,8 +1,8 @@
 package com.finbourne.lusid.integration;
 
 import com.finbourne.lusid.ApiClient;
-import com.finbourne.lusid.api.ApplicationMetadataApi;
-import com.finbourne.lusid.model.VersionSummaryDto;
+import com.finbourne.lusid.api.ScopesApi;
+import com.finbourne.lusid.model.ResourceListOfScopeDefinition;
 import com.finbourne.lusid.utilities.ApiClientBuilder;
 import org.junit.Test;
 
@@ -14,12 +14,12 @@ public class LusidApiTests {
     public void call_lusid_api() throws Exception {
 
         ApiClient apiClient = new ApiClientBuilder().build("secrets.json");
-        ApplicationMetadataApi metadataApi = new ApplicationMetadataApi(apiClient);
+        ScopesApi scopesApi = new ScopesApi(apiClient);
 
-        VersionSummaryDto version = metadataApi.getLusidVersions();
+        ResourceListOfScopeDefinition scopes = scopesApi.listScopes(null);
 
-        assertNotNull(version.getApiVersion());
-        assertNotNull(version.getBuildVersion());
-        assertNotNull(version.getExcelVersion());
+        assertNotNull(scopes.getValues());
+        assertNotNull(scopes.getHref());
+        assertNotNull(scopes.getLinks());
     }
 }

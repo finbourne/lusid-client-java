@@ -27,20 +27,20 @@ public class ConnectivityTests {
                 "https://www.howsmyssl.com/a/check"
 
                 /*
-                    enable the following url with your specific LUSID domain e.g.
+                    enable the following url with your specific LUSID client code e.g.
 
                         https://myco.lusid.com/api/api/metadata/versions
 
                 */
-                //"https://<enter your LUSID domain>.lusid.com/api/api/metadata/versions",
+                //"https://<enter your LUSID client code>.lusid.com/api/api/metadata/versions",
 
                 /*
-                    enable the following url with your specific LUSID domain e.g.
+                    enable the following url with your issuer URL e.g.
 
-                        https://myco.okta.com/oauth2/aus12345abcdef/.well-known/oauth-authorization-server
+                        https://lusid-myco.okta.com/oauth2/aus12345abcdef/.well-known/oauth-authorization-server
                  */
 
-                //"https://<your LUSID domain>/oauth2/<your LUSID app id>/.well-known/oauth-authorization-server"
+                //"<enter your issuer URL>/.well-known/oauth-authorization-server"
         };
     }
 
@@ -63,12 +63,13 @@ public class ConnectivityTests {
     @Ignore
     public void verify_connection_with_proxy() throws IOException {
 
-        //  this should be your proxy address
-        InetSocketAddress   proxy = new InetSocketAddress(InetAddress.getLocalHost(), 8889);
-
-        //  username and password for the proxy
+        //  proxyAdress, port, username and password for the proxy
+        InetAddress  proxyAddress = InetAddress.getLocalHost();
+        Integer port = 8889;
         String  proxyUsername = "user";
         String  proxyPassword = "password";
+        
+        InetSocketAddress   proxy = new InetSocketAddress(proxyAddress, port);
 
         OkHttpClient client = new OkHttpClient.Builder()
                 .proxy(new Proxy(Proxy.Type.HTTP, proxy))
