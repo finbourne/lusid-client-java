@@ -1,3 +1,5 @@
+![LUSID_by_Finbourne](https://content.finbourne.com/LUSID_repo.png)
+
 [![Build Status](https://travis-ci.org/finbourne/lusid-client-java.svg?branch=master)](https://travis-ci.org/finbourne/lusid-client-java)
 
 ## Running Connectivity Tests
