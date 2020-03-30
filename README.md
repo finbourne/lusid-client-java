@@ -78,7 +78,7 @@ If you use a proxy you can supply the proxy details via the following environmen
 
 ## Configuration File
 
-To supply the SDK configuration via a file, create a `secrets.json` in the src/test/resources folder (create it if it doesn't exist) with the structure below and populated with the appropriate values. If you use a proxy you can supply the proxy details in the `proxy` section. The `proxy` section is optional and only needed if you use a proxy.
+To supply the SDK configuration via a file, create a `secrets.json` in the `src/test/resources` folder (create it if it doesn't exist) with the structure below and populated with the appropriate values. If you use a proxy you can supply the proxy details in the `proxy` section. The `proxy` section is optional and only needed if you use a proxy.
 
 ``` json
 {
