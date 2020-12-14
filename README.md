@@ -1,6 +1,6 @@
-![LUSID_by_Finbourne](https://content.finbourne.com/LUSID_repo.png)
-
-[![Build Status](https://travis-ci.org/finbourne/lusid-client-java.svg?branch=master)](https://travis-ci.org/finbourne/lusid-client-java)
+| branch | status |
+|--|--|
+|`master`| ![Daily build](https://github.com/finbourne/lusid-client-java/workflows/Daily%20build/badge.svg) ![Build and test](https://github.com/finbourne/lusid-client-java/workflows/Build%20and%20test/badge.svg)  |
 
 ## Running Connectivity Tests
 
