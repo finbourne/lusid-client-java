@@ -5,10 +5,8 @@ name: Build and test
 # Trigger the workflow on push or pull request to master or develop
 
 on:
-  push:
-    branches: [ develop ]
   pull_request:
-    branches: [ master, develop ]
+    branches: [ master ]
 
 jobs:
   # This workflow contains a single job called "build"
