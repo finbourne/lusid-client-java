@@ -1,6 +1,7 @@
 | branch | status |
 |--|--|
-|`master`| ![Daily build](https://github.com/finbourne/lusid-client-java/workflows/Daily%20build/badge.svg) ![Build and test](https://github.com/finbourne/lusid-client-java/workflows/Build%20and%20test/badge.svg)  |
+|`master`| ![Daily build](https://github.com/finbourne/lusid-client-java/workflows/Daily%20build/badge.svg) ![Build and test](https://github.com/finbourne/lusid-client-java/workflows/Build%20and%20test/badge.svg) [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffinbourne%2Flusid-client-java.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Ffinbourne%2Flusid-client-java?ref=badge_shield)
+ |
 
 ## Running Connectivity Tests
 
@@ -131,3 +132,7 @@ Alternatively it can be run using docker with:
 ```
 $ docker run -it --rm -v $(pwd):/usr/src/lusid-client-java -w /usr/src/lusid-client-java maven:3.6.0-jdk-11-slim mvn -e -fae test
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffinbourne%2Flusid-client-java.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Ffinbourne%2Flusid-client-java?ref=badge_large)
