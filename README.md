@@ -1,6 +1,6 @@
 | branch | status |
 |--|--|
-|`master`| ![Daily build](https://github.com/finbourne/lusid-client-java/workflows/Daily%20build/badge.svg) ![Build and test](https://github.com/finbourne/lusid-client-java/workflows/Build%20and%20test/badge.svg)  |
+|`master`| ![Daily build](https://github.com/finbourne/lusid-client-java/workflows/Daily%20build/badge.svg) ![Build and test](https://github.com/finbourne/lusid-client-java/workflows/Build%20and%20test/badge.svg) |
 
 ## Running Connectivity Tests
 
