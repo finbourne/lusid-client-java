@@ -1,3 +1,5 @@
+![LUSID_by_Finbourne](./resources/Finbourne_Logo_Teal.svg)
+
 | branch | status |
 |--|--|
 |`master`| ![Daily build](https://github.com/finbourne/lusid-client-java/workflows/Daily%20build/badge.svg) ![Build and test](https://github.com/finbourne/lusid-client-java/workflows/Build%20and%20test/badge.svg) |
